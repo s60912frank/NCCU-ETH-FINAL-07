@@ -1,0 +1,10 @@
+$theme-colors: (
+    "primary": #F66E5E
+);
+
+// 調整fix-top navbar覆蓋body內容
+body {
+    min-height: 75rem;
+    padding-top: 56px;
+}
+@import "../node_modules/bootstrap/scss/bootstrap";

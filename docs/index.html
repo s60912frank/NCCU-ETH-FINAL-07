@@ -2,59 +2,63 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./vendor/bootstrap.min.css">
-  <title>Document</title>
-  <style>
-    .abc{
-      font-size: 30px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-      <a class="navbar-brand" href="#">
-        <img src="./images/logo-blank.png" width="35" height="35" alt="">
-      </a>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: #F66E5E;">
+        <a class="navbar-brand" href="#">FTRC Forum</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active h5">
+                    <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item h5">
+                    <a class="nav-link" href="#">Javascript</a>
+                </li>
+
+                <li class="nav-item h5">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-info my-2 my-sm-0" type="submit">Login</button>
+            </form>
+        </div>
+    </nav>
+    <div class="jumbotron">
+            <h1>什麼是區塊鏈論壇？</h1>
+            <p class="lead">你的回答是有價值的，加入論壇並且發表文章或回答問題來獲得獎金</p>
+            <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">註冊</a>
+            <a class="btn btn-lg btn-outline-secondary" href="../../components/navbar/" role="button">了解更多</a>
     </div>
-    <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="#">INFINITE</a>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="font-size: 20px">Login</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
-        </li> -->
-      </ul>
-    </div>
-  </nav>
-  <br>
-  <br>
-  <button id="abc" type="button" class="btn btn-secondary abc" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Primary</button>
-  <!-- <div class="alert alert-primary" role="alert">
-    A simple primary alert—check it out!
-  </div>
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary">Left</button>
-    <button type="button" class="btn btn-secondary">Middle</button>
-    <button type="button" class="btn btn-secondary">Right</button>
-  </div> -->
-  <script src="./vendor/jquery-3.0.0.slim.min.js"></script>
-  <script src="./vendor/bootstrap.bundle.min.js"></script>
-  <script>
-    $('#abc').tooltip('enable')
-    $('#abc').click(function(){
-      alert("hi");
-    });
-    
-  </script>
+    <main role="main" class="container">
+        
+        <div class="questions">
+            <div class="card">
+                <div class="card-body">
+                    kdlasjfgafda;fdjajfd;a
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
