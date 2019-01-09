@@ -1,10 +1,27 @@
-$theme-colors: (
-    "primary": #F66E5E
-);
+@import "./setting.scss";
+
+$main-color: #F66E5F;
 
 // 調整fix-top navbar覆蓋body內容
 body {
     min-height: 75rem;
     padding-top: 56px;
 }
-@import "../bootstrap/scss/bootstrap";
+
+.bg-main {
+    background-color: $main-color;
+}
+
+.main-color {
+    color: $main-color;
+}
+
+.btn-main{
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+}
+.btn-main:hover{
+    color: gray;
+    border: 1px solid gray;
+}
