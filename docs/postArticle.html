@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/main.css">
+  <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">FTRC Forum</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active h5">
+                    <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item h5">
+                    <a class="nav-link" href="#">Javascript</a>
+                </li>
+
+                <li class="nav-item h5">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
+                </li>
+            </ul>
+            <div id="beforelogin">
+              <button class="btn my-2 my-sm-0 btn-main">Login</button>
+            </div>
+            <div id="afterlogin" style="display:none;">
+              <div id="login-panel" class="person-panel-box metaMaskUser">
+                <img src="">
+                <p>name</p>
+              </div>
+              <button class="btn my-2 my-sm-0 btn-main">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="row d-flex justify-content-center postArticle">
+      <div class="col-9 bg-white">
+        <div class="person-panel-box metaMaskUser">
+          <img src="">
+          <p>name</p>
+        </div>
+        <form>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">發布留言</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+          </div>
+        </form>
+        <button type="button" class="btn btn-primary">發布</button>
+        <button type="button" class="btn btn-info">取消發布</button>
+      </div>
+    </div>
+
+
+  <!-- vendor library -->
+  <script src="./vendor/jquery-3.0.0.slim.min.js"></script>
+  <script src="./vendor/bootstrap.bundle.min.js"></script>
+  <script src="./vendor/web3.min.js"></script>
+  <script src="./vendor/blockies.min.js"></script>
+
+  <!-- self js -->
+  <script src="./js/provider.js"></script>
+
+  <script>
+    checkUser();
+  </script>
+</body>
+
+</html>
