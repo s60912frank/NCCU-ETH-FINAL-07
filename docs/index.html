@@ -2,81 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FTRC Forum</title>
-    <link rel="stylesheet" href="./css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FTRC Forum</title>
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
-                <a class="navbar-brand" href="#">FTRC Forum</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active h5">
-                            <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item h5">
-                            <a class="nav-link" href="#">Javascript</a>
-                        </li>
-        
-                        <li class="nav-item h5">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
-                        </li>
-                    </ul>
-                    <div id="beforelogin">
-                      <button class="btn my-2 my-sm-0 btn-main">Login</button>
-                    </div>
-                    <div id="afterlogin" style="display:none;">
-                      <div id="login-panel" class="person-panel-box">
-                        <img src="">
-                        <p>name</p>
-                      </div>
-                      <button class="btn my-2 my-sm-0 btn-main">Logout</button>
-                    </div>
-                </div>
-    </nav>
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">FTRC Forum</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="row d-flex justify-content-center">
-        <div class="col-9">
-            <div class="jumbotron">
-                <h1>什麼是區塊鏈論壇？</h1>
-                <p class="lead">你的回答是有價值的，加入論壇並且發表文章或回答問題來獲得獎金</p>
-                <a class="btn btn-lg btn-primary" href="#" role="button">註冊</a>
-                <a class="btn btn-lg btn-outline-secondary" href="# role=" button">了解更多</a>
-            </div>
-            <main role="main" class="container">
-        
-                <div class="questions">
-                    <div class="card">
-                        <div class="card-body">
-                            kdlasjfgafda;fdjajfd;a
-                        </div>
-                    </div>
-                </div>
-            </main>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active h5">
+          <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item h5">
+          <a class="nav-link" href="#">Javascript</a>
+        </li>
+
+        <li class="nav-item h5">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
+        </li>
+      </ul>
+      <div id="beforelogin">
+        <button class="btn my-2 my-sm-0 btn-main">Login</button>
+      </div>
+      <div id="afterlogin" style="display:none;">
+        <div id="login-panel" class="person-panel-box">
+          <img src="">
+          <p>name</p>
         </div>
+        <button class="btn my-2 my-sm-0 btn-main">Logout</button>
+      </div>
     </div>
+  </nav>
 
-    <!-- vendor library -->
-    <script src="./vendor/jquery-3.0.0.slim.min.js"></script>
-    <script src="./vendor/bootstrap.bundle.min.js"></script>
-    <script src="./vendor/web3.min.js"></script>
-    <script src="./vendor/blockies.min.js"></script>
+  <div class="row d-flex justify-content-center">
+    <div class="col-9">
 
-    <!-- self js -->
-    <script src="./js/provider.js"></script>
+      <div class="jumbotron">
+        <h1>什麼是區塊鏈論壇？</h1>
+        <p class="lead">你的回答是有價值的，加入論壇並且發表文章或回答問題來獲得獎金</p>
+        <a class="btn btn-lg btn-primary" href="#" role="button">註冊</a>
+        <a class="btn btn-lg btn-outline-secondary" href="#" role="button">了解更多</a>
+      </div>
+    </div>
+    
+    <main role="main" class="container">
 
-    <script>
-        checkUser();
-        bindLoginButton();
-    </script>
+      <ul class="questions">
+        <li class="card">
+          <div class="card-body">
+            <h5>Question Title</h5>
+            <h5>User name</h5>
+          </div>
+        </li>
+      </ul>
+    </main>
+
+  </div>
+
+  <!-- vendor library -->
+  <script src="./vendor/jquery-3.0.0.slim.min.js"></script>
+  <script src="./vendor/bootstrap.bundle.min.js"></script>
+  <script src="./vendor/web3.min.js"></script>
+  <script src="./vendor/blockies.min.js"></script>
+
+  <!-- self js -->
+  <script src="./js/provider.js"></script>
+
+  <script>
+    checkUser();
+    bindLoginButton();
+  </script>
 </body>
 
 </html>
