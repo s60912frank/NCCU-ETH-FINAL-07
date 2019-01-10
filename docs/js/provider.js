@@ -45,12 +45,11 @@ const login = async () => {
       $('#login-panel p').text(firstUser.slice(2,8));
       metaMaskUserObject = {
           'account': firstUser,
-          'img':icon.toDataURL()
+          'img':icon.toDataURL(),
       }
       localStorage.setItem('metaMaskUserObject', JSON.stringify(metaMaskUserObject));
       checkUser();
-
-      console.log("localStorage:metaMaskUserObject");
+      console.log("Metamask get user account[0]");
       console.log(metaMaskUserObject);
       
     } catch (error) {
@@ -59,10 +58,15 @@ const login = async () => {
     }
 
     try {
+      const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
       localAccounts = await web3LocalhostProvider.eth.getAccounts()
+
       console.log("local server:"+our_server_url);
+      console.log("local server get user account[0]");
+      metaMaskUserObject.localAccount = localAccounts[0]
+      localStorage.setItem('metaMaskUserObject', JSON.stringify(metaMaskUserObject));
+      console.log(metaMaskUserObject);
       
-      console.log(localAccounts);
 
     } catch (error) {
       console.error(error);
@@ -77,7 +81,7 @@ const login = async () => {
   }
 }
 
-const logout = ()=>{
+const clear = ()=>{
   // remove user storage
   localStorage.removeItem('metaMaskUserObject')
   // remove web3 Provider
@@ -101,7 +105,6 @@ const checkUser = async ()=>{
     try {
       await getProvider();
       const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
-      console.log(metaMaskUserObject.account);
       console.log("user login");
       if(metaMaskUserObject.account){
         $('.person-panel-box img').each(function(){
@@ -114,7 +117,7 @@ const checkUser = async ()=>{
       }
     } catch (error) {
       // localstorage no metaMaskUserObject
-      logout()
+      clear()
       console.log("no user");
     }
 }
@@ -127,12 +130,38 @@ const bindLoginButton = ()=>{
 
   $('#afterlogin button').click(function(){
     // logout button
-    logout();
+    clear();
     loginButtleToggle();
     console.log("log out");
   })
 }
 
 
-// .... section //
+// postQuestion section //
+const postQuestion= async(userAddress,qsTitle,qsContent,qsAmount)=>{
+  // console.log(userAddress);
+  // console.log(qsTitle);
+  // console.log(qsContent);
+  // console.log(parseInt(qsAmount,10));
 
+  const contractAddress = 
+  await fetch("./GlobalSetting/address.txt")
+    .then(res => res.text());
+
+  console.log(contractAddress);
+  const abi = await fetch("./GlobalSetting/abi.json").then(res=>res.json());
+
+  let ftrc_forum = new web3LocalhostProvider.eth.Contract(abi);
+  ftrc_forum.options.address = contractAddress;
+
+  const newContractInstance = await ftrc_forum.methods.askQuestion(qsTitle,qsContent).send({
+    from: userAddress,
+    gas: 3400000,
+    value: parseInt(qsAmount,10)
+  });
+  
+  console.log(newContractInstance);
+}
+
+
+// ... section //
