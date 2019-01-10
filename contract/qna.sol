@@ -27,9 +27,10 @@ contract QnA {
         // TODO: 改成ipfs/swarm hash
         string content;
         uint32[] comments;
-        bool isAnswered;
+        // bool isAnswered;
+        // 如果acceptedAnswer == uint32最大值 表示這個問題還沒被回答
         uint32 acceptedAnswer;
-        uint received_val;  
+        uint received_val;
         uint time;
     }
 
@@ -122,6 +123,7 @@ contract QnA {
         newQ.value = msg.value;
         newQ.title = title;
         newQ.content = content;
+        newQ.acceptedAnswer = uint32Max();
         newQ.time = now;
         // recored BEFORE append question(qId start from 0)
         uint32 qId = uint32(questions.length);
@@ -159,7 +161,7 @@ contract QnA {
     function acceptAnswer(uint32 questionId, uint32 commentId) public {
         Question storage Q = questions[questionId];
         Comment memory A = comments[commentId];
-        require(!Q.isAnswered, "This question already answered.");
+        require(Q.acceptedAnswer == uint32Max(), "This question already answered.");
         require(Q.owner == msg.sender, "You cannot accept answer!");
         require(questionId < questions.length, "Question not found!");
         require(commentId < comments.length, "Comment not found!");
@@ -167,10 +169,8 @@ contract QnA {
         require(A.questionId == questionId, "Wrong questionId for comment!");
         // Give accepted answer question value
         uint reward = questions[questionId].value;
-        // comments[commentId].owner.transfer(reward);
         transferAndRecordForComment(reward, commentId);
         // Mark this question as answered
-        Q.isAnswered = true;
         Q.acceptedAnswer = commentId;
         // Emit event
         emit questionAnswered(questionId, commentId, reward);
@@ -200,12 +200,35 @@ contract QnA {
         emit questionDonated(questionId, msg.sender, msg.value);
     }
     
-    // getters
+    /*
+        Getters
+    */
     function getAllQuestionIdByAddr(address addr) public view returns (uint32[] memory) {
         return members[addr].ownQuestion;
     }
     
     function getAllCommentIdByAddr(address addr) public view returns (uint32[] memory) {
         return members[addr].ownComment;
+    }
+    
+    function getQuestionById(uint32 id) public view returns (address, uint, string memory, uint32, uint, uint, uint) {
+        require(id < questions.length, "Question not found!");
+        Question memory q = questions[id];
+        // 依序回傳問題的: 發問者、獎勵、標題、接受的回答id、收到多少斗內、發問時間、回應數量
+        return (q.owner, q.value, q.title, q.acceptedAnswer, q.received_val, q.time, q.comments.length);
+    }
+    
+    function getQuestionDetailById(uint32 id) public view returns (string memory, uint32[] memory) {
+        // 這裡回傳問題的內容，以及回應的list
+        require(id < questions.length, "Question not found!");
+        Question memory q = questions[id];
+        return (q.content, q.comments);
+    }
+    
+    function getCommentById(uint32 id) public view returns (address, uint32, uint32, string memory, uint, uint) {
+        require(id < comments.length, "Comment not found!");
+        Comment memory c = comments[id];
+        // 依序回傳回答(回應)的: 回答者、所屬問題id、所屬回答id、內容、收到多少斗內、留言時間
+        return (c.owner, c.questionId, c.parentId, c.content, c.received_val, c.time);
     }
 }
