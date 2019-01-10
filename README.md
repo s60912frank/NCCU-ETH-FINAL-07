@@ -13,15 +13,14 @@ Then open any Ethereum development tools,then
 node deploy.js
 ```
 
-The server location must be the same as frontend api call
+It will deploy to local Ethereum develop server,and set the `docs/GlobalSetting/address.txt`
+
+---
+
 
 ## Metamask
 
 Login will use web3.currentProvider to detect,suppose that you have already install a `Metamask` plugin in browser.
-
-
-
----
 
 # Docs folder (frontend)
 
