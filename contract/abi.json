@@ -3,6 +3,45 @@
 		"constant": true,
 		"inputs": [
 			{
+				"name": "id",
+				"type": "uint32"
+			}
+		],
+		"name": "getCommentById",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint32"
+			},
+			{
+				"name": "",
+				"type": "uint32"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
 				"name": "",
 				"type": "address"
 			}
@@ -59,10 +98,6 @@
 				"type": "string"
 			},
 			{
-				"name": "isAnswered",
-				"type": "bool"
-			},
-			{
 				"name": "acceptedAnswer",
 				"type": "uint32"
 			},
@@ -89,6 +124,29 @@
 		],
 		"name": "getAllCommentIdByAddr",
 		"outputs": [
+			{
+				"name": "",
+				"type": "uint32[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint32"
+			}
+		],
+		"name": "getQuestionDetailById",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
 			{
 				"name": "",
 				"type": "uint32[]"
@@ -221,6 +279,49 @@
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint32"
+			}
+		],
+		"name": "getQuestionById",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint32"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
