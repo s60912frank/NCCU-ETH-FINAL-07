@@ -1,5 +1,7 @@
+//global variable
 let  web3MetamaskProvider,web3LocalhostProvider;
 const our_server_url = "http://localhost:8545";
+
 // login/logout section //
 const getProvider = async () => {
   try {
@@ -22,7 +24,6 @@ const getProvider = async () => {
     console.error(error);
   }
 }
-
 
 const login = async () => {
   try {
@@ -83,10 +84,10 @@ const logout = ()=>{
   web3MetamaskProvider = undefined;
   web3LocalhostProvider = undefined;
   // remove user object
-  $('.metaMaskUser img').each(function(){
+  $('.person-panel-box img').each(function(){
     $(this).attr('src','');
   })
-  $('.metaMaskUser p').each(function(){
+  $('.person-panel-box p').each(function(){
     $(this).text('name');
   })
   // toggle login/logout button
@@ -100,10 +101,10 @@ const checkUser = async ()=>{
       const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
       console.log(metaMaskUserObject.account);
       console.log("user login");
-      $('.metaMaskUser img').each(function(){
+      $('.person-panel-box img').each(function(){
         $(this).attr('src',metaMaskUserObject.img);
       })
-      $('.metaMaskUser p').each(function(){
+      $('.person-panel-box p').each(function(){
         $(this).text(metaMaskUserObject.account.slice(2,8));
       })
       $( "#afterlogin" ).toggle("d-none");
@@ -127,8 +128,6 @@ const bindLoginButton = ()=>{
     console.log("log out");
   })
 }
-
-
 
 
 // .... section //
