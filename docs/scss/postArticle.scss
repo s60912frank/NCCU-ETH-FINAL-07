@@ -12,4 +12,9 @@ $main-color: #F66E5F;
   p {
     color: $main-color;
   }
+  form {
+    label {
+      font-size: 1.5em;
+    }
+  }
 }
