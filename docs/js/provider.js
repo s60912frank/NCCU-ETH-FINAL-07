@@ -90,7 +90,9 @@ const logout = ()=>{
   $('.person-panel-box p').each(function(){
     $(this).text('name');
   })
-  // toggle login/logout button
+}
+
+const loginButtleToggle = ()=>{
   $( "#afterlogin" ).toggle("d-none");
   $( "#beforelogin" ).toggle("d-none");
 }
@@ -101,14 +103,15 @@ const checkUser = async ()=>{
       const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
       console.log(metaMaskUserObject.account);
       console.log("user login");
-      $('.person-panel-box img').each(function(){
-        $(this).attr('src',metaMaskUserObject.img);
-      })
-      $('.person-panel-box p').each(function(){
-        $(this).text(metaMaskUserObject.account.slice(2,8));
-      })
-      $( "#afterlogin" ).toggle("d-none");
-      $( "#beforelogin" ).toggle("d-none");
+      if(metaMaskUserObject.account){
+        $('.person-panel-box img').each(function(){
+          $(this).attr('src',metaMaskUserObject.img);
+        })
+        $('.person-panel-box p').each(function(){
+          $(this).text(metaMaskUserObject.account.slice(2,8));
+        })
+        loginButtleToggle()
+      }
     } catch (error) {
       // localstorage no metaMaskUserObject
       logout()
@@ -124,7 +127,8 @@ const bindLoginButton = ()=>{
 
   $('#afterlogin button').click(function(){
     // logout button
-    logout()
+    logout();
+    loginButtleToggle();
     console.log("log out");
   })
 }
