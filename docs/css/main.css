@@ -27,6 +27,7 @@
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
+  --viridian-green: #00989D;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -1706,6 +1707,26 @@ pre code {
   background-color: #b9bbbe;
 }
 
+.table-viridian-green,
+.table-viridian-green > th,
+.table-viridian-green > td {
+  background-color: #b8e2e4;
+}
+.table-viridian-green th,
+.table-viridian-green td,
+.table-viridian-green thead th,
+.table-viridian-green tbody + tbody {
+  border-color: #7ac9cc;
+}
+
+.table-hover .table-viridian-green:hover {
+  background-color: #a6dadd;
+}
+.table-hover .table-viridian-green:hover > td,
+.table-hover .table-viridian-green:hover > th {
+  background-color: #a6dadd;
+}
+
 .table-active,
 .table-active > th,
 .table-active > td {
@@ -2509,6 +2530,33 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
 }
 
+.btn-viridian-green {
+  color: #fff;
+  background-color: #00989D;
+  border-color: #00989D;
+}
+.btn-viridian-green:hover {
+  color: #fff;
+  background-color: #007377;
+  border-color: #00676a;
+}
+.btn-viridian-green:focus, .btn-viridian-green.focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 167, 172, 0.5);
+}
+.btn-viridian-green.disabled, .btn-viridian-green:disabled {
+  color: #fff;
+  background-color: #00989D;
+  border-color: #00989D;
+}
+.btn-viridian-green:not(:disabled):not(.disabled):active, .btn-viridian-green:not(:disabled):not(.disabled).active, .show > .btn-viridian-green.dropdown-toggle {
+  color: #fff;
+  background-color: #00676a;
+  border-color: #005a5d;
+}
+.btn-viridian-green:not(:disabled):not(.disabled):active:focus, .btn-viridian-green:not(:disabled):not(.disabled).active:focus, .show > .btn-viridian-green.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 167, 172, 0.5);
+}
+
 .btn-outline-primary {
   color: #F66E5F;
   border-color: #F66E5F;
@@ -2707,6 +2755,31 @@ fieldset:disabled a.btn {
 }
 .btn-outline-dark:not(:disabled):not(.disabled):active:focus, .btn-outline-dark:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-dark.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+.btn-outline-viridian-green {
+  color: #00989D;
+  border-color: #00989D;
+}
+.btn-outline-viridian-green:hover {
+  color: #fff;
+  background-color: #00989D;
+  border-color: #00989D;
+}
+.btn-outline-viridian-green:focus, .btn-outline-viridian-green.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 152, 157, 0.5);
+}
+.btn-outline-viridian-green.disabled, .btn-outline-viridian-green:disabled {
+  color: #00989D;
+  background-color: transparent;
+}
+.btn-outline-viridian-green:not(:disabled):not(.disabled):active, .btn-outline-viridian-green:not(:disabled):not(.disabled).active, .show > .btn-outline-viridian-green.dropdown-toggle {
+  color: #fff;
+  background-color: #00989D;
+  border-color: #00989D;
+}
+.btn-outline-viridian-green:not(:disabled):not(.disabled):active:focus, .btn-outline-viridian-green:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-viridian-green.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 152, 157, 0.5);
 }
 
 .btn-link {
@@ -4546,6 +4619,15 @@ a.badge-dark:hover, a.badge-dark:focus {
   background-color: #1d2124;
 }
 
+.badge-viridian-green {
+  color: #fff;
+  background-color: #00989D;
+}
+a.badge-viridian-green:hover, a.badge-viridian-green:focus {
+  color: #fff;
+  background-color: #00676a;
+}
+
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
@@ -4685,6 +4767,18 @@ a.badge-dark:hover, a.badge-dark:focus {
 }
 .alert-dark .alert-link {
   color: #040505;
+}
+
+.alert-viridian-green {
+  color: #004f52;
+  background-color: #cceaeb;
+  border-color: #b8e2e4;
+}
+.alert-viridian-green hr {
+  border-top-color: #a6dadd;
+}
+.alert-viridian-green .alert-link {
+  color: #001e1f;
 }
 
 @keyframes progress-bar-stripes {
@@ -4919,6 +5013,20 @@ a.badge-dark:hover, a.badge-dark:focus {
   color: #fff;
   background-color: #1b1e21;
   border-color: #1b1e21;
+}
+
+.list-group-item-viridian-green {
+  color: #004f52;
+  background-color: #b8e2e4;
+}
+.list-group-item-viridian-green.list-group-item-action:hover, .list-group-item-viridian-green.list-group-item-action:focus {
+  color: #004f52;
+  background-color: #a6dadd;
+}
+.list-group-item-viridian-green.list-group-item-action.active {
+  color: #fff;
+  background-color: #004f52;
+  border-color: #004f52;
 }
 
 .close {
@@ -5735,6 +5843,16 @@ button.bg-dark:focus {
   background-color: #1d2124 !important;
 }
 
+.bg-viridian-green {
+  background-color: #00989D !important;
+}
+
+a.bg-viridian-green:hover, a.bg-viridian-green:focus,
+button.bg-viridian-green:hover,
+button.bg-viridian-green:focus {
+  background-color: #00676a !important;
+}
+
 .bg-white {
   background-color: #fff !important;
 }
@@ -5813,6 +5931,10 @@ button.bg-dark:focus {
 
 .border-dark {
   border-color: #343a40 !important;
+}
+
+.border-viridian-green {
+  border-color: #00989D !important;
 }
 
 .border-white {
@@ -9377,6 +9499,14 @@ a.text-dark:hover, a.text-dark:focus {
   color: #121416 !important;
 }
 
+.text-viridian-green {
+  color: #00989D !important;
+}
+
+a.text-viridian-green:hover, a.text-viridian-green:focus {
+  color: #004e51 !important;
+}
+
 .text-body {
   color: #212529 !important;
 }
@@ -9513,7 +9643,6 @@ h3 {
 }
 body {
   padding-top: 56px;
-  background-image: url("../images/bg.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9529,15 +9658,8 @@ body {
   color: #F66E5F;
 }
 
-.btn-main {
-  color: white;
-  background-color: transparent;
-  border: 1px solid white;
-}
-
-.btn-main:hover {
-  color: gray;
-  border: 1px solid gray;
+.tags .list-group-item {
+  border: 0;
 }
 
 #afterlogin {
@@ -9548,7 +9670,6 @@ body {
   width: 9em;
   display: flex;
   padding-left: 8px;
-  padding-top: 9px;
   margin-right: 10px;
 }
 .person-panel-box img {
@@ -9558,10 +9679,9 @@ body {
 }
 .person-panel-box p {
   color: white;
-  font-size: 1.3em;
   font-weight: bold;
   padding-left: 10px;
-  margin-bottom: 0.5em;
+  margin-bottom: 0;
 }
 
 .postQuestion {

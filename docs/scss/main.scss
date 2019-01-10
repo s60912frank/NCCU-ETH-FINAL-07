@@ -5,7 +5,7 @@ $main-color: #F66E5F;
 // 調整fix-top navbar覆蓋body內容
 body {
     padding-top: 56px;
-    background-image: url("../images/bg.jpg");
+    //background-image: url("../images/bg.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -21,14 +21,20 @@ body {
     color: $main-color;
 }
 
-.btn-main{
-    color: white;
-    background-color: transparent;
-    border: 1px solid white;
-}
-.btn-main:hover{
-    color: gray;
-    border: 1px solid gray;
+// .btn-main{
+//     color: white;
+//     background-color: transparent;
+//     border: 1px solid white;
+// }
+// .btn-main:hover{
+//     color: gray;
+//     border: 1px solid gray;
+// }
+
+.tags{
+  .list-group-item {
+    border: 0;
+  }
 }
 
 @import "./login.scss";
