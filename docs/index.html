@@ -34,7 +34,6 @@
         </ul>
         <div id="beforelogin">
           <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
-          <button class="btn my-2 my-sm-0 btn-viridian-green font-weight-bold">註冊</button>
         </div>
         <div id="afterlogin" style="display:none;">
           <div id="login-panel" class="person-panel-box d-flex align-items-center">
@@ -56,7 +55,6 @@
         <div class="col-9">
           <h1>什麼是區塊鏈論壇？</h1>
           <p class="lead">你的回答是有價值的，加入論壇並且發表文章或回答問題來獲得獎金</p>
-          <a class="btn btn-lg btn-primary" href="#" role="button">註冊</a>
           <a class="btn btn-lg btn-outline-secondary" href="#" role="button">了解更多</a>
         </div>
       </div>
@@ -84,16 +82,35 @@
         </div>
 
       </div>
+
       <!-- #Questions -->
       <main role="main" class="col-8">
 
-        <ul class="questions">
-          <li class="card">
-            <div class="card-body">
-              <h5>Question Title</h5>
-              <h5>User name</h5>
+        <!-- #questions list group -->
+        <ul class="questions list-group">
+          <li class="question list-group-item">
+            <div class="row">
+              <div class="functions col d-flex flex-row">
+                <a href="#" class="btn btn-outline-danger mx-1 d-flex align-items-center justify-content-center">
+                  <span class="my-auto">捐贈</span>
+                </a>
+                <a href="#" class="btn text-light bg-viridian-green mx-1 d-flex flex-column">
+                  <span>1</span>
+                  <span>回答</span>
+                </a>
+              </div>
+              <div class="col-9">
+                <h5>Display inline - overflow visible opacity Display inline - overflow visible opacity</h5>
+                <div class="row d-flex justify-content-between">
+                  <div class="col-6">
+                    <a href="#" class="badge badge-light">account address</a>
+                  </div>
+                  <div class="col-6 text-right">10 days ago</div>
+                </div>
+              </div>
             </div>
           </li>
+
         </ul>
       </main>
       <!-- #Ask -->

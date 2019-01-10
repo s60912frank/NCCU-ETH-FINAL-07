@@ -9662,6 +9662,13 @@ body {
   border: 0;
 }
 
+.question .functions {
+  min-width: 150px;
+}
+.question .functions a {
+  height: 70px;
+}
+
 #afterlogin {
   display: flex;
 }

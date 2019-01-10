@@ -21,19 +21,20 @@ body {
     color: $main-color;
 }
 
-// .btn-main{
-//     color: white;
-//     background-color: transparent;
-//     border: 1px solid white;
-// }
-// .btn-main:hover{
-//     color: gray;
-//     border: 1px solid gray;
-// }
 
 .tags{
   .list-group-item {
     border: 0;
+  }
+}
+
+.question {
+  .functions {
+    min-width: 150px;
+    a {
+      height: 70px;
+    }
+    
   }
 }
 
