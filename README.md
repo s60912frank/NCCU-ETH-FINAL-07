@@ -2,7 +2,7 @@
 Final project
 
 
-# Backend folder 
+## Backend folder 
 first install node related library
 ```
 npm install
@@ -33,7 +33,7 @@ sass --watch scss/main.scss:css/main.css
 
 ```
 
-### (optional)
+#### (optional)
 use live-server to develop
 
 Ref:https://gist.github.com/donmccurdy/20fb112949324c92c5e8
@@ -49,5 +49,8 @@ In the folder you want to run,this project is under the `docs/`
 ```
 live-server --no-browser --port=8380
 ```
+
+
+## Github Page
 Then you can open any browser in localhost:8380 to see the result,it will be the same as github page  
 https://s60912frank.github.io/NCCU-ETH-FINAL-07/

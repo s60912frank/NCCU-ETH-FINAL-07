@@ -29,7 +29,7 @@ contract QnA {
         uint32[] comments;
         bool isAnswered;
         uint32 acceptedAnswer;
-        uint received_val;
+        uint received_val;  
         uint time;
     }
 
