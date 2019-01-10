@@ -8,6 +8,7 @@ contract QnA {
     mapping (address => User) public members;
     Question[] public questions;
     Comment[] public comments;
+    QuestionType[] public questionstypes;
     uint32 donate_ratio;
     
     /*
@@ -19,10 +20,16 @@ contract QnA {
         uint32[] ownComment;
         // More attributes?
     }
+    
+    struct QuestionType {
+        string name;
+        uint32[] questions;
+    }
 
     struct Question {
         address payable owner;
         uint value;
+        uint32 qTypeId;
         string title;
         // TODO: 改成ipfs/swarm hash
         string content;
@@ -115,19 +122,29 @@ contract QnA {
         donate_ratio = ratio;
     }
     
-    function askQuestion(string memory title, string memory content) public payable {
+    function addQuestionType(string memory name) public onlyOwner {
+        QuestionType memory qt;
+        qt.name = name;
+        questionstypes.push(qt);
+    }
+    
+    function askQuestion(uint32 questionTypeId, string memory title, string memory content) public payable {
         require(msg.value > 0, "You need to give reward!");
+        require(questionTypeId < questionstypes.length, "Type not found");
         // new a question
         Question memory newQ;
         newQ.owner = msg.sender;
         newQ.value = msg.value;
         newQ.title = title;
         newQ.content = content;
+        newQ.qTypeId = questionTypeId;
         newQ.acceptedAnswer = uint32Max();
         newQ.time = now;
         // recored BEFORE append question(qId start from 0)
         uint32 qId = uint32(questions.length);
         questions.push(newQ);
+        // push question to accoring type
+        questionstypes[questionTypeId].questions.push(qId);
         // Add connection between user and question
         members[msg.sender].ownQuestion.push(qId);
         // Emit event
@@ -211,11 +228,11 @@ contract QnA {
         return members[addr].ownComment;
     }
     
-    function getQuestionById(uint32 id) public view returns (address, uint, string memory, uint32, uint, uint, uint) {
+    function getQuestionById(uint32 id) public view returns (address, uint, uint32, string memory, uint32, uint, uint, uint) {
         require(id < questions.length, "Question not found!");
         Question memory q = questions[id];
-        // 依序回傳問題的: 發問者、獎勵、標題、接受的回答id、收到多少斗內、發問時間、回應數量
-        return (q.owner, q.value, q.title, q.acceptedAnswer, q.received_val, q.time, q.comments.length);
+        // 依序回傳問題的: 發問者、獎勵、類別、標題、接受的回答id、收到多少斗內、發問時間、回應數量
+        return (q.owner, q.value, q.qTypeId, q.title, q.acceptedAnswer, q.received_val, q.time, q.comments.length);
     }
     
     function getQuestionDetailById(uint32 id) public view returns (string memory, uint32[] memory) {
@@ -231,4 +248,17 @@ contract QnA {
         // 依序回傳回答(回應)的: 回答者、所屬問題id、所屬回答id、內容、收到多少斗內、留言時間
         return (c.owner, c.questionId, c.parentId, c.content, c.received_val, c.time);
     }
+    
+    function getAllQuestionTypes() public view returns (string memory) {
+        if(questionstypes.length == 0) return "";
+        string memory s = questionstypes[0].name;
+        for(uint i = 1;i < questionstypes.length;i++) {
+            s = string(abi.encodePacked(s, ",", questionstypes[i].name));
+        }
+        return s;
+    }
+    
+    function getAllQuestionsByTypeId(uint32 id) public view returns (uint32[] memory){
+        return questionstypes[id].questions;
+    } 
 }

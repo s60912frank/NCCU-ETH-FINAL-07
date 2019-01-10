@@ -1,5 +1,27 @@
 [
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "questionTypeId",
+				"type": "uint32"
+			},
+			{
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"name": "content",
+				"type": "string"
+			}
+		],
+		"name": "askQuestion",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{
@@ -58,6 +80,25 @@
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "questionstypes",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -90,6 +131,10 @@
 				"type": "uint256"
 			},
 			{
+				"name": "qTypeId",
+				"type": "uint32"
+			},
+			{
 				"name": "title",
 				"type": "string"
 			},
@@ -112,6 +157,20 @@
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"name": "addQuestionType",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -176,24 +235,6 @@
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "title",
-				"type": "string"
-			},
-			{
-				"name": "content",
-				"type": "string"
-			}
-		],
-		"name": "askQuestion",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -301,6 +342,10 @@
 			},
 			{
 				"name": "",
+				"type": "uint32"
+			},
+			{
+				"name": "",
 				"type": "string"
 			},
 			{
@@ -318,6 +363,20 @@
 			{
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAllQuestionTypes",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
 			}
 		],
 		"payable": false,
@@ -359,6 +418,25 @@
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "id",
+				"type": "uint32"
+			}
+		],
+		"name": "getAllQuestionsByTypeId",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
