@@ -105,7 +105,7 @@ const checkUser = async ()=>{
     try {
       await getProvider();
       const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
-      console.log("user login");
+      console.log("check user");
       if(metaMaskUserObject.account){
         $('.person-panel-box img').each(function(){
           $(this).attr('src',metaMaskUserObject.img);
@@ -136,14 +136,8 @@ const bindLoginButton = ()=>{
   })
 }
 
-
-// postQuestion section //
-const postQuestion= async(userAddress,qsTitle,qsContent,qsAmount)=>{
-  // console.log(userAddress);
-  // console.log(qsTitle);
-  // console.log(qsContent);
-  // console.log(parseInt(qsAmount,10));
-
+// util section //
+const getFtrcContract = async()=>{
   const contractAddress = 
   await fetch("./GlobalSetting/address.txt")
     .then(res => res.text());
@@ -153,15 +147,67 @@ const postQuestion= async(userAddress,qsTitle,qsContent,qsAmount)=>{
 
   let ftrc_forum = new web3LocalhostProvider.eth.Contract(abi);
   ftrc_forum.options.address = contractAddress;
+  return ftrc_forum
+}
 
-  const newContractInstance = await ftrc_forum.methods.askQuestion(qsTitle,qsContent).send({
+// index section //
+const getAllQuestion = async()=>{
+  const ftrc_forum = await getFtrcContract();
+  let qsList = [];
+
+  await Promise.all([0,1,2,3,4].map(async (questionID) => {
+    let result = await ftrc_forum.methods.getQuestionById(questionID).call();
+    result.id = questionID;
+    qsList.push(result);
+  }));
+
+  const allMappingResult = qsList.map((question) => {
+    const mappingQuestion = {
+      "qsId": question.id,
+      "asker": question[0],
+      "reward": question[1],
+      "qsType": question[2],
+      "qsTitle": question[3],
+      "acceptAnswer": question[4],
+      "donate": question[5],
+      "time": question[6],
+      "replyNumber": question[7]
+    }
+    return mappingQuestion;
+  });
+
+   // 依序回傳問題的: 發問者、獎勵、類別、標題、接受的回答id、收到多少斗內、發問時間、回應數量
+  console.log(allMappingResult);
+  return allMappingResult;
+}
+
+// postQuestion section //
+const getAllQuestionTypes = async()=>{
+  // getAllQuestionTypes
+  const ftrc_forum = await getFtrcContract();
+  const result = await ftrc_forum.methods.getAllQuestionTypes().call();
+  const resultArray = result.split(",");
+  console.log(resultArray);
+  return resultArray;
+}
+
+const postQuestion = async(userAddress,qsType,qsTitle,qsContent,qsAmount)=>{
+  // console.log(userAddress);
+  // console.log(qsTitle);
+  // console.log(qsContent);
+  // console.log(parseInt(qsAmount,10));
+  const ftrc_forum = await getFtrcContract();
+
+  const newContractInstance = await ftrc_forum.methods.askQuestion(qsType,qsTitle,qsContent).send({
     from: userAddress,
     gas: 3400000,
     value: parseInt(qsAmount,10)
   });
   
   console.log(newContractInstance);
+  return newContractInstance;
 }
+
 
 
 // ... section //

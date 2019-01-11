@@ -11,57 +11,67 @@
 
 <body>
   <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">FTRC Forum</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container">
+     
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item active h5">
-          <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item h5">
-          <a class="nav-link" href="#">Javascript</a>
-        </li>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="/">FTRC Forum</a>
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active h5">
+            <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item h5">
+            <a class="nav-link" href="#">Javascript</a>
+          </li>
 
-        <li class="nav-item h5">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
-        </li>
-      </ul>
-      <div id="beforelogin">
-        <button class="btn my-2 my-sm-0 btn-main">Login</button>
-      </div>
-      <div id="afterlogin" style="display:none;">
-        <div id="login-panel" class="person-panel-box">
-          <img src="">
-          <p>name</p>
+          <li class="nav-item h5">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
+          </li>
+        </ul>
+        <div id="beforelogin">
+          <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
         </div>
-        <button class="btn my-2 my-sm-0 btn-main">Logout</button>
+        <div id="afterlogin" style="display:none;">
+          <div id="login-panel" class="person-panel-box d-flex align-items-center">
+            <img src="" class="img-fluid">
+            <p>name</p>
+          </div>
+          <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登出</button>
+        </div>
       </div>
     </div>
   </nav>
 
 
-  <div class="row d-flex justify-content-center postQuestion">
+  <div class="row d-flex justify-content-center postQuestion bg-light">
     <div class="col-9 bg-white">
-      <div class="person-panel-box">
+      <div class="d-flex align-items-center person-panel-box">
         <img src="">
         <p>name</p>
       </div>
       <form>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">發布問題</label>
-          <hr>
+          <hr style="border:2px solid rgba(255,5,0,0.3);">
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="inputEmail4">問題標題</label>
               <input id="postTitle" class="form-control" type="text" placeholder="問題標題">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="inputPassword4">問題金額</label>
               <input id="postAmount" class="form-control" type="number" placeholder="1(eth)">
+              <!-- Mwei, -->
+            </div>
+            <div class="form-group col-md-4">
+              <label for="questionSelect">問題類別</label>
+              <select class="form-control" id="questionSelect">           
+                <!-- <option value="0">JS</option> -->
+              </select>
             </div>
             <div class="form-group col-md-12">
               <label for="inputPassword4">問題內容</label>
@@ -73,7 +83,7 @@
         </div>
       </form>
       <button id="postQuestionButton" type="button" class="btn btn-primary">發布</button>
-      <button type="button" class="btn btn-info">取消發布</button>
+      <button id="unPostQuestionButton" type="button" class="btn btn-info">取消發布</button>
     </div>
   </div>
 
@@ -90,16 +100,38 @@
   <script>
     checkUser();
     bindLoginButton();
+    async function pageLoad(){
+      try {
+        const qsTypeList = await getAllQuestionTypes();
+        $.each(qsTypeList, function (i, item) {
+          $('#questionSelect').append($('<option>', { 
+              value: i,
+              text : item
+          }));
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    pageLoad();
 
     $('#postQuestionButton').click(async function(){
       try {
         const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
         const user = metaMaskUserObject.localAccount;
-        await postQuestion(user,$('#postTitle').val(),$('#postContent').val(),$('#postAmount').val());
+        const result = await postQuestion(user,parseInt($('#questionSelect').val(),10),$('#postTitle').val(),$('#postContent').val(),$('#postAmount').val());
+        alert("發布成功");
+        history.go(-1);
       } catch (error) {
         console.error(error);
+        alert("發布失敗");
       }
     })
+
+    $('#unPostQuestionButton').click(function(){
+      history.go(-1);
+    })
+
 
 
   </script>
