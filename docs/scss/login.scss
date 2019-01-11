@@ -3,12 +3,10 @@
 }
 .person-panel-box {
   // box-shadow: 4px 4px 12px -2px rgba(51, 51, 102, 0.5);
-  width: 9em;
-  display: flex;
+  width: 7.1em;
   // border: 1px solid white;
   // border-radius: 24%;
-  padding-left: 8px;
-  margin-right: 10px;
+  margin-right: 2px;
   img {
     width: 2em;
     height: 2em;
@@ -17,7 +15,7 @@
   p {
     color: white;
     font-weight: bold;
-    padding-left: 10px;
     margin-bottom: 0;
+    padding: 0.5em;
   }
 }
