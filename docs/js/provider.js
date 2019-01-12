@@ -2,7 +2,6 @@
 let  web3MetamaskProvider,web3LocalhostProvider;
 const our_server_url = "http://localhost:8545";
 const our_server_accountNumber = 0;
-
 // util section //
 const getProvider = async () => {
   try {
@@ -211,15 +210,16 @@ const setProblemList = async() =>{
     const askerAddress = asker.slice(2,8);
     const postDay = new Date(parseInt(time,10)*1000);
     const showDay = postDay.getFullYear()+"-"+(postDay.getMonth()+1)+"-"+postDay.getDate();
-    
+    const finneyAmount = Web3.utils.fromWei(reward,'finney');
+
     const qsHtmlLi = 
       `
       <li class="question list-group-item">
         <div class="row">
           <div class="functions col d-flex flex-row justify-content-between">
             <a href="./singleQuestion.html?q=${qsID}" class="btn text-light bg-danger mx-1 d-flex flex-column">
-              <span>${reward}</span>
-              <span>coin</span>
+              <span>${finneyAmount}</span>
+              <span>Finney</span>
             </a>
             <a href="./singleQuestion.html?q=${qsID}" class="btn text-viridian-green btn-outline-viridian-green mx-1 d-flex flex-column">
               <span>${replyNumber}</span>
