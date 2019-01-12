@@ -9643,11 +9643,10 @@ h3 {
 }
 body {
   padding-top: 56px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  min-height: 100%;
+}
+
+nav li {
+  margin-top: 9px;
 }
 
 .bg-main {
@@ -9668,16 +9667,20 @@ body {
 .question .functions a {
   height: 70px;
 }
+.question .questionLink a {
+  color: black;
+}
+.question .questionLink a:hover {
+  color: #F66E5F;
+}
 
 #afterlogin {
   display: flex;
 }
 
 .person-panel-box {
-  width: 9em;
-  display: flex;
-  padding-left: 8px;
-  margin-right: 10px;
+  width: 7.1em;
+  margin-right: 2px;
 }
 .person-panel-box img {
   width: 2em;
@@ -9687,12 +9690,23 @@ body {
 .person-panel-box p {
   color: white;
   font-weight: bold;
-  padding-left: 10px;
   margin-bottom: 0;
+  padding: 0.5em;
 }
 
 .postQuestion {
-  padding: 10% 0;
+  padding: 5% 0;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feccb1+0,f17432+50,ea5507+51,fb955e+100;Red+Gloss+%232 */
+  background: #feccb1;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#feccb1", endColorstr="#fb955e",GradientType=0 );
+  /* IE6-9 */
 }
 .postQuestion .bg-white {
   box-shadow: 4px 4px 12px -2px rgba(90, 90, 92, 0.5);
@@ -9702,6 +9716,7 @@ body {
 }
 .postQuestion p {
   color: #F66E5F;
+  font-size: 1em;
 }
 .postQuestion form label {
   font-size: 1.5em;

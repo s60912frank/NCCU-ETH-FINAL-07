@@ -6,7 +6,7 @@ let web3 = new Web3('http://localhost:8545')
 const abi = JSON.parse(fs.readFileSync('./abi.json'))
 const bytecode = '0x' + fs.readFileSync('./bytecode').toString()
 
-let bank = new web3.eth.Contract(abi)
+let ftrc_forum = new web3.eth.Contract(abi)
 
 web3.eth.getAccounts().then(function (accounts) {
 
@@ -23,7 +23,7 @@ web3.eth.getAccounts().then(function (accounts) {
     // let gasEstimate = web3.eth.estimateGas({data: bytecode});
     // console.log('gasEstimate = ' + gasEstimate);
 
-    bank.deploy({
+    ftrc_forum.deploy({
         data: bytecode,
     })
     .send({
@@ -47,11 +47,13 @@ web3.eth.getAccounts().then(function (accounts) {
         console.log("confirmationNumber: "+confirmationNumber);
         // console.log("receipt:");
         // console.log(receipt);
-        
     })
     .then(function(newContractInstance){
         console.log("Save newContractInstance.options.address: ");
         console.log(newContractInstance.options.address);
+        fs.writeFileSync('address.txt',newContractInstance.options.address);
+        
+        console.log("Save newContractInstance.options.address in GlobalSetting ");
         fs.writeFileSync('../docs/GlobalSetting/address.txt',newContractInstance.options.address)
     });
 })

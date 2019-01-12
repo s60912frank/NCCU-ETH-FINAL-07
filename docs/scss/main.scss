@@ -5,12 +5,12 @@ $main-color: #F66E5F;
 // 調整fix-top navbar覆蓋body內容
 body {
     padding-top: 56px;
-    //background-image: url("../images/bg.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    min-height: 100%; 
+}
+
+nav {
+  li {
+    margin-top: 9px;
+  }
 }
 
 .bg-main {
@@ -34,9 +34,19 @@ body {
     a {
       height: 70px;
     }
-    
+  }
+  
+  .questionLink{
+    a {
+      color: black;
+    }
+    a:hover {
+      color: $main-color;
+    }
   }
 }
+
+
 
 @import "./login.scss";
 @import "./postQuestion.scss";
