@@ -119,7 +119,7 @@ const clear = ()=>{
   localStorage.removeItem('metaMaskUserObject')
   // remove web3 Provider
   web3MetamaskProvider = undefined;
-  web3LocalhostProvider = undefined;
+  // web3LocalhostProvider = undefined;
   // remove user object
   $('.person-panel-box img').each(function(){
     $(this).attr('src','');
@@ -151,6 +151,8 @@ const bindLoginButton = ()=>{
 
 // index section //
 const getAllQuestion = async()=>{
+  console.log(web3LocalhostProvider);
+  
   const ftrc_forum = await getFtrcContract();
   let allQuestionCount = await ftrc_forum.methods.getTotalQuestionLength().call()
   const N = allQuestionCount; 
