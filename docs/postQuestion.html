@@ -11,39 +11,41 @@
 
 <body>
   <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
-    <div class="container">
-     
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <a class="navbar-brand" href="/">FTRC Forum</a>
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item active h5">
-            <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item h5">
-            <a class="nav-link" href="#">Javascript</a>
-          </li>
-
-          <li class="nav-item h5">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
-          </li>
-        </ul>
-        <div id="beforelogin">
-          <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
-        </div>
-        <div id="afterlogin" style="display:none;">
-          <div id="login-panel" class="person-panel-box d-flex align-items-center">
-            <img src="" class="img-fluid">
-            <p>name</p>
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="images/BlockAsk_Brand.png" alt="BlockAsk_Brand.png" style="width:45px;height:45px;">
+          塊問塊答
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active h5">
+              <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item h5">
+              <a class="nav-link" href="#">Javascript</a>
+            </li>
+  
+            <li class="nav-item h5">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
+            </li>
+          </ul>
+          <div id="beforelogin">
+            <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
           </div>
-          <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登出</button>
+          <div id="afterlogin" style="display:none;">
+            <div id="login-panel" class="person-panel-box d-flex align-items-center">
+              <img src="" class="img-fluid">
+              <p>name</p>
+            </div>
+            <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登出</button>
+          </div>
         </div>
       </div>
-    </div>
   </nav>
 
 
@@ -64,7 +66,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="inputPassword4">問題金額</label>
-              <input id="postAmount" class="form-control" type="number" placeholder="1(eth)">
+              <input id="postAmount" class="form-control" type="number" placeholder="1(finney)">
               <!-- Mwei, -->
             </div>
             <div class="form-group col-md-4">
