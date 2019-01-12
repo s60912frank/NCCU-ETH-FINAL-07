@@ -1,6 +1,3 @@
 contract/node_modules/*
 contract/package-lock.json
 contract/address.txt
-
-
-docs/GlobalSetting/address.txt
