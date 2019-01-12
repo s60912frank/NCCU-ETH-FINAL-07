@@ -47,7 +47,6 @@ web3.eth.getAccounts().then(function (accounts) {
         console.log("confirmationNumber: "+confirmationNumber);
         // console.log("receipt:");
         // console.log(receipt);
-        
     })
     .then(function(newContractInstance){
         console.log("Save newContractInstance.options.address: ");
@@ -56,6 +55,5 @@ web3.eth.getAccounts().then(function (accounts) {
         
         console.log("Save newContractInstance.options.address in GlobalSetting ");
         fs.writeFileSync('../docs/GlobalSetting/address.txt',newContractInstance.options.address)
-       
     });
 })

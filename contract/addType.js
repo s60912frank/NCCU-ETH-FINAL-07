@@ -27,16 +27,20 @@ const addType = async(deployerAddress,questionType) => new Promise((resolve,reje
   })
 });
 
-web3.eth.getAccounts().then(async function (accounts) { 
-  // console.log(accounts);
-
-  const deployer = accounts[0];
+const run = ()=>{
+  web3.eth.getAccounts().then(async function (accounts) { 
+    // console.log(accounts);
   
-  // console.log(deployer);
-  // parrell,so the order is not the same as above;
-  for (const questionType of questionTypeArray) {
-    console.log(questionType);
-    const receipt = await addType(deployer,questionType);
-    console.log("save:"+questionType+"\n"+receipt);
-  }
-});
+    const deployer = accounts[0];
+    
+    // console.log(deployer);
+    // parrell,so the order is not the same as above;
+    for (const questionType of questionTypeArray) {
+      console.log(questionType);
+      const receipt = await addType(deployer,questionType);
+      console.log("save:"+questionType+"\n"+receipt);
+    }
+  });
+}
+
+run();
