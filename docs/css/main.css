@@ -9641,6 +9641,10 @@ h3 {
     border-color: #dee2e6;
   }
 }
+a.text-viridian-green:hover {
+  color: #FFF !important;
+}
+
 body {
   padding-top: 56px;
 }
@@ -9720,6 +9724,45 @@ nav li {
 }
 .postQuestion form label {
   font-size: 1.5em;
+}
+
+ul.share-buttons {
+  list-style: none;
+  padding: 0;
+}
+ul.share-buttons li {
+  display: inline;
+}
+ul.share-buttons .sr-only {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.singleQuestion h6 {
+  color: #F66E5F;
+}
+.singleQuestion .person-panel-box p {
+  color: black;
+}
+.singleQuestion .sqPostAnswer .col-lg-12 {
+  margin-top: 10px;
+}
+.singleQuestion .sqPostAnswer hr {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.singleQuestion .card-header img {
+  width: 2.5em;
+  height: 2.5em;
+}
+.singleQuestion .card-header p {
+  font-size: 1.5em;
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
