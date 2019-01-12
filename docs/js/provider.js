@@ -2,7 +2,7 @@
 let  web3MetamaskProvider,web3LocalhostProvider;
 const our_server_url = "http://localhost:8545";
 
-// login/logout section //
+// util section //
 const getProvider = async () => {
   try {
     if (typeof web3 !== 'undefined') {
@@ -24,7 +24,40 @@ const getProvider = async () => {
     console.error(error);
   }
 }
+const checkUser = async ()=>{
+  try {
+    await getProvider();
+    const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
+    console.log("check user");
+    if(metaMaskUserObject.account){
+      $('.person-panel-box img').each(function(){
+        $(this).attr('src',metaMaskUserObject.img);
+      })
+      $('.person-panel-box p').each(function(){
+        $(this).text(metaMaskUserObject.account.slice(2,8));
+      })
+      loginButtleToggle()
+    }
+  } catch (error) {
+    // localstorage no metaMaskUserObject
+    clear()
+    console.log("no user");
+  }
+}
+const getFtrcContract = async()=>{
+  const contractAddress = 
+  await fetch("./GlobalSetting/address.txt")
+    .then(res => res.text());
 
+  console.log(contractAddress);
+  const abi = await fetch("./GlobalSetting/abi.json").then(res=>res.json());
+
+  let ftrc_forum = new web3LocalhostProvider.eth.Contract(abi);
+  ftrc_forum.options.address = contractAddress;
+  return ftrc_forum
+}
+
+// login/logout section //
 const login = async () => {
   try {
     await getProvider();
@@ -86,7 +119,7 @@ const clear = ()=>{
   localStorage.removeItem('metaMaskUserObject')
   // remove web3 Provider
   web3MetamaskProvider = undefined;
-  web3LocalhostProvider = undefined;
+  // web3LocalhostProvider = undefined;
   // remove user object
   $('.person-panel-box img').each(function(){
     $(this).attr('src','');
@@ -99,27 +132,6 @@ const clear = ()=>{
 const loginButtleToggle = ()=>{
   $( "#afterlogin" ).toggle("d-none");
   $( "#beforelogin" ).toggle("d-none");
-}
-
-const checkUser = async ()=>{
-    try {
-      await getProvider();
-      const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
-      console.log("check user");
-      if(metaMaskUserObject.account){
-        $('.person-panel-box img').each(function(){
-          $(this).attr('src',metaMaskUserObject.img);
-        })
-        $('.person-panel-box p').each(function(){
-          $(this).text(metaMaskUserObject.account.slice(2,8));
-        })
-        loginButtleToggle()
-      }
-    } catch (error) {
-      // localstorage no metaMaskUserObject
-      clear()
-      console.log("no user");
-    }
 }
 
 const bindLoginButton = ()=>{
@@ -136,22 +148,11 @@ const bindLoginButton = ()=>{
   })
 }
 
-// util section //
-const getFtrcContract = async()=>{
-  const contractAddress = 
-  await fetch("./GlobalSetting/address.txt")
-    .then(res => res.text());
-
-  console.log(contractAddress);
-  const abi = await fetch("./GlobalSetting/abi.json").then(res=>res.json());
-
-  let ftrc_forum = new web3LocalhostProvider.eth.Contract(abi);
-  ftrc_forum.options.address = contractAddress;
-  return ftrc_forum
-}
 
 // index section //
 const getAllQuestion = async()=>{
+  console.log(web3LocalhostProvider);
+  
   const ftrc_forum = await getFtrcContract();
   let allQuestionCount = await ftrc_forum.methods.getTotalQuestionLength().call()
   const N = allQuestionCount; 

@@ -163,40 +163,12 @@
   <script>
     checkUser();
     bindLoginButton();
-
-
-
-    $('#postQS').click(function () {
+    $('#postQS').click(function(){
       window.location = "./postQuestion.html"
     })
 
-    const mappingArrray = getAllQuestion()
-
-    //   <li class="question list-group-item">
-    //     <div class="row">
-    //       <div class="functions col d-flex flex-row">
-    //         <a href="#" class="btn btn-outline-danger mx-1 d-flex align-items-center justify-content-center">
-    //           <span class="my-auto">捐贈</span>
-    //         </a>
-    //         <a href="#" class="btn text-light bg-viridian-green mx-1 d-flex flex-column">
-    //           <span>1</span>
-    //           <span>回答</span>
-    //         </a>
-    //       </div>
-    //       <div class="col-9 questionLink">
-    //         <a href="">
-    //           <h5>Display inline - overflow visible opacity Display inline - overflow visible opacity</h5>
-    //         </a>
-    //         <div class="row d-flex justify-content-between">
-    //           <div class="col-6">
-    //             <p class="badge badge-light">account address</p>
-    //           </div>
-    //           <div class="col-6 text-right">10 days ago</div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </li>
-    // console.log($('.questions')[0]);
+    const mappingArray = getAllQuestion()
+    console.log(mappingArray);
   </script>
 </body>
 

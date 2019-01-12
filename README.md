@@ -13,6 +13,14 @@ Then open any Ethereum development tools,then
 node deploy.js
 ```
 
+After deploy,run
+
+```
+node addType.js
+```
+
+to add question Type
+
 It will deploy to local Ethereum develop server,and set the `docs/GlobalSetting/address.txt`
 
 ---
