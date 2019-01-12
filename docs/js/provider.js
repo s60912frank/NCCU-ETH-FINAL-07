@@ -153,15 +153,17 @@ const getFtrcContract = async()=>{
 // index section //
 const getAllQuestion = async()=>{
   const ftrc_forum = await getFtrcContract();
-  let qsList = [];
-
-  await Promise.all([0,1,2,3,4].map(async (questionID) => {
+  let allQuestionCount = await ftrc_forum.methods.getTotalQuestionLength().call()
+  const N = allQuestionCount; 
+  let queryQSArray = Array.apply(null, {length: N}).map(Number.call, Number)
+  
+  const qsArray = await Promise.all(queryQSArray.map(async (questionID) => {
     let result = await ftrc_forum.methods.getQuestionById(questionID).call();
     result.id = questionID;
-    qsList.push(result);
+    return result
   }));
 
-  const allMappingResult = qsList.map((question) => {
+  const allMappingResult = qsArray.map((question) => {
     const mappingQuestion = {
       "qsId": question.id,
       "asker": question[0],
