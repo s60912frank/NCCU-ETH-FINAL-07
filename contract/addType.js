@@ -10,31 +10,33 @@ let ftrc_forum = new web3.eth.Contract(abi)
 ftrc_forum.options.address = fs.readFileSync('./address.txt').toString()
 
 
-const questionType = ["Ethernum","Javascript","Swift"]
+const questionTypeArray = ["Ethernum","Javascript","Swift"]
 
 
-web3.eth.getAccounts().then(function (accounts) { 
+const addType = async(deployerAddress,questionType) => new Promise((resolve,reject)=>{
+  ftrc_forum.methods.addQuestionType(questionType).send({
+    from: deployerAddress,
+    gas: 3400000
+  }).on('receipt', function (receipt) {
+    console.log(receipt);
+    resolve(receipt);
+  })
+  .on('error', function (error) {
+    console.error(error);
+    reject(error);
+  })
+});
+
+web3.eth.getAccounts().then(async function (accounts) { 
   // console.log(accounts);
 
   const deployer = accounts[0];
   
   // console.log(deployer);
   // parrell,so the order is not the same as above;
-  questionType.forEach(ele=>{
-    ftrc_forum.methods.addQuestionType(ele).send({
-      from: deployer,
-      gas: 3400000
-    }).on('receipt', function (receipt) {
-      console.log(receipt);
-    })
-    .on('error', function (error) {
-      console.error(error);
-    })
-    
-  })
+  for (const questionType of questionTypeArray) {
+    console.log(questionType);
+    const receipt = await addType(deployer,questionType);
+    console.log("save:"+questionType+"\n"+receipt);
+  }
 });
-
-
-
-
-

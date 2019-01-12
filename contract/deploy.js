@@ -52,7 +52,10 @@ web3.eth.getAccounts().then(function (accounts) {
     .then(function(newContractInstance){
         console.log("Save newContractInstance.options.address: ");
         console.log(newContractInstance.options.address);
+        fs.writeFileSync('address.txt',newContractInstance.options.address);
+        
+        console.log("Save newContractInstance.options.address in GlobalSetting ");
         fs.writeFileSync('../docs/GlobalSetting/address.txt',newContractInstance.options.address)
-        fs.writeFileSync('address.txt',newContractInstance.options.address)
+       
     });
 })
