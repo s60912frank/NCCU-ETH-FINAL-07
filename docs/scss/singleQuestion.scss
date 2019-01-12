@@ -1,0 +1,33 @@
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+  li{
+    display: inline;
+  }
+  .sr-only{
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
+}
+
+.singleQuestion {
+  .person-panel-box{
+    p{
+      color: black;
+    }
+  }
+  .sqPostAnswer{
+    .col-lg-12{
+      margin-top: 10px;
+    }
+    hr {
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+  }
+}
