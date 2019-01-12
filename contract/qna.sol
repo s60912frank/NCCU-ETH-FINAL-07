@@ -82,8 +82,7 @@ contract QnA {
     */
     
     function uint32Max() private pure returns (uint32) {
-        uint32 i = 0;
-        return i - 1;
+        return 4294967295;
     }
     
     function transferAndRecordForComment(uint value, uint32 cId) private {
@@ -258,7 +257,11 @@ contract QnA {
         return s;
     }
     
-    function getAllQuestionsByTypeId(uint32 id) public view returns (uint32[] memory){
+    function getAllQuestionsByTypeId(uint32 id) public view returns (uint32[] memory) {
         return questionstypes[id].questions;
-    } 
+    }
+    
+    function getTotalQuestionLength() public view returns(uint256) {
+        return questions.length;
+    }
 }
