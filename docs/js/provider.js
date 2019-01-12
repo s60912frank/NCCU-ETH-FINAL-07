@@ -164,4 +164,28 @@ const postQuestion= async(userAddress,qsTitle,qsContent,qsAmount)=>{
 }
 
 
+//...addComment section...//
+const addComment= async(userAddress,questionId,parentCommentId,content)=>{
+ 
+  const contractAddress = 
+  await fetch("./GlobalSetting/address.txt")
+    .then(res => res.text());
+
+  console.log(contractAddress);
+  const abi = await fetch("./GlobalSetting/abi.json").then(res=>res.json());
+
+  let ftrc_forum = new web3LocalhostProvider.eth.Contract(abi);
+  ftrc_forum.options.address = contractAddress;
+
+  const newContractInstance = await ftrc_forum.methods.askQuestion(questionId,parentCommentId,content).send({
+    from: userAddress,
+    gas: 3400000,
+    value: content
+  });
+  
+  console.log(newContractInstance);
+}
+
+
+
 // ... section //

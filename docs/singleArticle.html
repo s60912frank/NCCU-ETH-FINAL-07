@@ -7,6 +7,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/main.css">
   <title>Document</title>
+<style>
+    ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
+
+ul.share-buttons .sr-only{
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+</style>
 </head>
 
 <body>
@@ -41,32 +62,50 @@
     <div class="container">
 
       <div class="row">
+          <div class="col-lg-2"></div>
         <div class="col-lg-10"> 
           <h1 class="mt-4">Post Title</h1>
            <div class="lead">
                <div class="media-body">
                     <h5 class="mt-0">
+                        <div class="row">
+                        <div class="col-lg-4">
                         <img class=" mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                          by <a href="#">小名</a></h5>
+                          by <a href="#">小名aa</a></div>    
+                            <div class="col-lg-4"> </div>
+                            <div class="col-lg-4 align-bottom" style="padding-bottom:0px"> 
+                                <p class="h6 " style="font-size:4px;">Posted on January 1, 2018 at 12:00 PM</p></div>
+                        </div>
+                        
 
+                   </h5>
                 </div>
            </div>
           
-            <hr>
-          <p>Posted on January 1, 2018 at 12:00 PM</p>
-          <hr>
-            <div>
+           
+          
+          <div class="row">
+              
+            <div class="col-lg-9">
             拉拉拉拉阿拉阿拉拉拉內文
             </div>
-          <hr>
-           
+            <div class="col-lg-3">
+          <ul class="share-buttons">
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u=&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="images/flat_web_icon_set/color/Facebook.png" /></a></li>
+  <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="images/flat_web_icon_set/color/Twitter.png" /></a></li>
+  
+</ul>
+                
+              </div>
+            </div>
+        <hr>
           <blockquote class="blockquote">
             <div class="row">
                 <div class="col-lg-10"> 
-                <textarea class="form-control" rows="2" placeholder="留言:"></textarea>
+                <textarea id="Comment" class="form-control" rows="2" placeholder="留言:"></textarea>
                 </div>
                 <div class="col-lg-2"> 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="commentSubmit" class="btn btn-primary">Submit</button>
                 </div>
               </div>
           </blockquote>
@@ -81,17 +120,18 @@
             </div>
           </div>
 
+            
           <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
               <h5 class="mt-0">A</h5>
-              哈哈哈哈哈哈哈哈哈阿哈
+              djf; ja ;
 
               <div class="media mt-4">
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
                   <h5 class="mt-0">B</h5>
-                  哈哈哈哈哈哈哈哈好有趣!
+                  a;f j;jd ;
                 </div>
               </div>
 
@@ -99,22 +139,22 @@
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                 <div class="media-body">
                   <h5 class="mt-0">C</h5>
-                  XDDDDDDDD
+                  ajf;jafj;sd
                 </div>
               </div>
 
             </div>
           </div>
 
-        </div>
+        
 
-        <div class="col-md-2">
-        </div>
+        
+       </div>
+       <div class="col-lg-2"></div>
 
-      </div>
     </div>
    
- 
+    </div>
       
 
 
@@ -128,9 +168,23 @@
   <script src="./js/provider.js"></script>
 
   <script>
+   
     checkUser();
     bindLoginButton();
+   
+
+    $('#commentSubmit').click(async function(){
+      try {
+        const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
+        const user = metaMaskUserObject.localAccount;
+        await addComment(user,questionId,parentCommentId,$('#Comment').val());
+      } catch (error) {
+        console.error(error);
+      }
+    })
+
   </script>
+   
 </body>
 
 </html>
