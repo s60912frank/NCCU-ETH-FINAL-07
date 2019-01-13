@@ -23,17 +23,8 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item active h5">
-            <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item h5">
-            <a class="nav-link" href="#">Javascript</a>
-          </li>
+        <ul class="mx-auto">
 
-          <li class="nav-item h5">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
-          </li>
         </ul>
         <div id="beforelogin">
           <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
@@ -69,16 +60,16 @@
       <!-- #Tags -->
       <div class="col-2">
         <div class="card">
-          <div class="card-header">所有標籤</div>
+          <div class="card-header">Tag</div>
           <ul class="tags list-group list-group-flush">
             <li class="list-group-item">
-              BITCOIN
+              <button class="btn" onclick="filterProblemList('Ethernum')">Ethernum</button> 
             </li>
             <li class="list-group-item">
-              JAVASCRIPT
+              <button class="btn" onclick="filterProblemList('Javascript')">Javascript</button>  
             </li>
             <li class="list-group-item">
-              SWIFT
+              <button class="btn" onclick="filterProblemList('Swift')">Swift</button> 
             </li>
 
           </ul>

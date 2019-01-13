@@ -199,10 +199,11 @@ const getAllQuestion = async()=>{
   return allMappingResult;
 }
 
-
-const setProblemList = async() =>{
+const filterProblemList = async(filterString) => {
   const qsResultArray = await getAllQuestion();
   console.log(qsResultArray);
+  const qsQuestionTypes = await getAllQuestionTypes()
+
   $('#questionMainPage').html(`<ul id="questionMainUl" class="questions list-group"></ul>`);
   
   qsResultArray.map(ele=>{
@@ -211,7 +212,7 @@ const setProblemList = async() =>{
     const postDay = new Date(parseInt(time,10)*1000);
     const showDay = postDay.getFullYear()+"-"+(postDay.getMonth()+1)+"-"+postDay.getDate();
     const finneyAmount = Web3.utils.fromWei(reward,'finney');
-
+    const qsTypeString = qsQuestionTypes[qsType]
     const qsHtmlLi = 
       `
       <li class="question list-group-item">
@@ -233,6 +234,58 @@ const setProblemList = async() =>{
             <div class="row d-flex justify-content-between">
               <div class="col-6">
                 <p class="badge badge-light">${askerAddress}</p>
+                <p class="badge badge-light">${qsTypeString}</p>
+              </div>
+              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small>${showDay}</small></div>
+            </div>
+          </div>
+        </div>
+      </li>
+        `;
+        
+    if (qsTypeString == filterString) return qsHtmlLi;
+  }).forEach(ele=>{
+    $('#questionMainUl').append(ele);
+  })
+}
+
+const setProblemList = async() =>{
+
+  const qsResultArray = await getAllQuestion();
+  console.log(qsResultArray);
+  const qsQuestionTypes = await getAllQuestionTypes()
+
+  $('#questionMainPage').html(`<ul id="questionMainUl" class="questions list-group"></ul>`);
+  
+  qsResultArray.map(ele=>{
+    const {qsID,asker,reward,qsType,qsTitle,acceptAnswer,donate,time,replyNumber} = ele;
+    const askerAddress = asker.slice(2,8);
+    const postDay = new Date(parseInt(time,10)*1000);
+    const showDay = postDay.getFullYear()+"-"+(postDay.getMonth()+1)+"-"+postDay.getDate();
+    const finneyAmount = Web3.utils.fromWei(reward,'finney');
+    const qsTypeString = qsQuestionTypes[qsType]
+    const qsHtmlLi = 
+      `
+      <li class="question list-group-item">
+        <div class="row">
+          <div class="functions col d-flex flex-row justify-content-between">
+            <a href="./singleQuestion.html?q=${qsID}" class="btn text-light bg-danger mx-1 d-flex flex-column">
+              <span>${finneyAmount}</span>
+              <span>Finney</span>
+            </a>
+            <a href="./singleQuestion.html?q=${qsID}" class="btn text-viridian-green btn-outline-viridian-green mx-1 d-flex flex-column">
+              <span>${replyNumber}</span>
+              <span>回答</span>
+            </a>
+          </div>
+          <div class="col-9 questionLink">
+            <a href="./singleQuestion.html?q=${qsID}">
+              <h5>${qsTitle}</h5>
+            </a>
+            <div class="row d-flex justify-content-between">
+              <div class="col-6">
+                <p class="badge badge-light">${askerAddress}</p>
+                <p class="badge badge-light">${qsTypeString}</p>
               </div>
               <div class="col-6 text-right font-weight-light text-secondary font-italic"><small>${showDay}</small></div>
             </div>

@@ -3,6 +3,20 @@ $theme-colors: (
     "viridian-green": #00989D
 );
 
+$font-family-sans-serif:
+  // Safari for macOS and iOS (San Francisco)
+  -apple-system,
+  // Chrome < 56 for macOS (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Microsoft JhengHei",
+  "Segoe UI",
+  // Android
+  "Roboto",
+  // Basic web fallback
+  "Helvetica Neue", Arial, sans-serif,
+  // Emoji fonts
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 @import "../bootstrap/scss/bootstrap";
 
 a.text-viridian-green:hover {
