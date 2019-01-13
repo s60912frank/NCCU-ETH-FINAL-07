@@ -158,18 +158,15 @@
     $('#answerSubmit').click(async function () {
       try {
         const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
-        const user = metaMaskUserObject.localAccount;
+        const user = metaMaskUserObject.account;
         await addAnswer(user,questionID, $('#Answer').val());
         alert("發布成功");
         location.reload();
       } catch (error) {
         console.error(error);
+        alert("發布失敗");
       }
-    })
-
-    
-    
-
+    });
   </script>
 
 </body>

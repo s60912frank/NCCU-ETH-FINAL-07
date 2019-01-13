@@ -120,7 +120,7 @@
     $('#postQuestionButton').click(async function(){
       try {
         const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
-        const user = metaMaskUserObject.localAccount;
+        const user = metaMaskUserObject.account;
         const result = await postQuestion(user,parseInt($('#questionSelect').val(),10),$('#postTitle').val(),$('#postContent').val(),$('#postAmount').val());
         alert("發布成功");
         history.go(-1);
