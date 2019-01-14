@@ -125,41 +125,53 @@ contract QnA {
     function checkExpire(uint32 questionId) public {
         Question storage q = questions[questionId];
         if(q.isAnswered // 已經被回答了
-            && now < q.time + question_expire_after) // 問題還沒過期
+            || now < q.time + question_expire_after) // 問題還沒過期
             revert();
-        uint32 bestAnswerValId = uint32Max; // 預設最大值表示這個問題雖然完結，但沒有最佳解
         if(q.comments.length == 0) {
             // 沒人回QQ 退錢給發問者
             q.owner.transfer(q.value);
-        }
-        else {
-            uint bestAnswerVal;
-            for(uint i = 1;i < q.comments.length;i++) {
+            // 紀錄這個問題已經回答了
+            q.acceptedAnswer = uint32Max;
+            q.isAnswered = true;
+        } else {
+            uint bestAnswerVal = 0;
+            uint32[] memory candidateAnswerIds = new uint32[](q.comments.length);
+            uint cciIndex = 0; // 上面那個array的index啦
+            for(uint i = 0;i < q.comments.length;i++) {
                 uint32 cId = q.comments[i];
                 Comment memory c = comments[cId];
-                if(c.parentId == uint32Max 
-                    && c.received_val > bestAnswerVal) {
-                    bestAnswerVal = c.received_val;
-                    bestAnswerValId = cId;
+                if(c.parentId == uint32Max) {
+                    if(c.received_val > bestAnswerVal) {
+                        // 清掉temp array
+                        candidateAnswerIds = new uint32[](q.comments.length);
+                        cciIndex = 1;
+                        candidateAnswerIds[0] = cId;
+                        bestAnswerVal = c.received_val;
+                    } else if(c.received_val == bestAnswerVal) {
+                        // 放入temp array
+                        candidateAnswerIds[cciIndex] = cId;
+                        cciIndex ++;
+                    }
                 }
+            } // 這個for執行完後array應該會有所有最高獎金的留言id
+            // cciIndex會等於所有最多讚回答的數量
+            uint valPerBestAns = q.value / cciIndex;
+            for(uint i = 0;i < cciIndex;i++) {
+                transferAndRecordForComment(valPerBestAns, candidateAnswerIds[i]);
             }
-            // 把錢轉給最佳解
-            if(bestAnswerValId != uint32Max) {
-                transferAndRecordForComment(q.value, bestAnswerValId);
+            // 紀錄這個問題已經回答了
+            q.isAnswered = true;
+            if(cciIndex == 1) {
+                q.acceptedAnswer = candidateAnswerIds[0];
             } else {
-                // 沒結果 怎辦
-                // 先退錢給發問者好ㄌ
-                q.owner.transfer(q.value);
+                q.acceptedAnswer = uint32Max;
             }
         }
-        // 紀錄這個問題已經回答了
-        q.isAnswered = true;
-        q.acceptedAnswer = bestAnswerValId;
     }
     
     function askQuestion(uint32 questionTypeId, string memory title, string memory content) public payable {
         if(msg.value == 0 // 沒給獎勵
-            && questionTypeId < questionstypes.length) // 問題類型不存在
+            || questionTypeId > questionstypes.length) // 問題類型不存在
             revert();
         // new a question
         Question memory newQ;
@@ -183,7 +195,7 @@ contract QnA {
     
     function addAnswer(uint32 questionId, string memory content) public {
         if(questionId > questions.length // 問題不存在
-            && now > questions[questionId].time + question_expire_after) // 問題已經過期不能答了
+            || now > questions[questionId].time + question_expire_after) // 問題已經過期不能答了
             revert();
         // new a Comment
         uint32 cId = commentFactory(questionId, content, uint32Max);
@@ -196,7 +208,7 @@ contract QnA {
     
     function addComment(uint32 questionId, uint32 parentCommentId, string memory content) public {
         if(questionId > questions.length // 問題不存在
-            && parentCommentId > comments.length) // 回應的回答不存在
+            || parentCommentId > comments.length) // 回應的回答不存在
             revert();
         // new a Comment
         uint32 cId = commentFactory(questionId, content, parentCommentId);
@@ -211,12 +223,12 @@ contract QnA {
         Question storage Q = questions[questionId];
         Comment memory A = comments[commentId];
         if(Q.isAnswered // 已經解答的不能再選
-            && Q.owner != msg.sender // 提問者才能選
-            && now > Q.time + question_expire_after // 問題已經過期
-            && questionId > questions.length // 問題id不存在
-            && commentId > comments.length // 回答id不存在
-            && A.parentId != uint32Max // 不能選回應
-            && A.questionId != questionId) // 回答id跟問題id不合
+            || Q.owner != msg.sender // 提問者才能選
+            || now > Q.time + question_expire_after // 問題已經過期
+            || questionId > questions.length // 問題id不存在
+            || commentId > comments.length // 回答id不存在
+            || A.parentId != uint32Max // 不能選回應
+            || A.questionId != questionId) // 回答id跟問題id不合
             revert();
         // Give accepted answer question value
         uint rewardToAnswer = Q.value * 80 / 100; // 80%給答題 20%返還給提問者
@@ -231,10 +243,13 @@ contract QnA {
     }
     
     function donateComment(uint32 commentId) public payable {
-        require(commentId < comments.length); // 找不到comment
+        if(msg.value == 0 // 不能捐0元啦
+            || commentId > comments.length) // 找不到comment
+            revert();
         // 計算該給發問者跟回答者的斗內
-        uint toCommentMaker = (msg.value * (donate_ratio - 1)) / donate_ratio;
-        uint toQuestionMaker = msg.value - toCommentMaker; // 因為沒有浮點數所以用減的
+        uint toQuestionMaker = msg.value / donate_ratio;
+        // 因為沒有浮點數所以用減的 因為上面除起來可能是0 donate以comment優先~
+        uint toCommentMaker = msg.value - toQuestionMaker;
         
         // 分別轉帳給發問者跟回答者
         // 紀錄收到多少斗內
@@ -248,7 +263,9 @@ contract QnA {
     }
     
     function donateQuestion(uint32 questionId) public payable {
-        require(questionId < questions.length); // 找不到問題
+        if(msg.value == 0 // 不能捐0元啦
+            || questionId < questions.length) // 找不到問題
+            revert();
         transferAndRecordForQuestion(msg.value, questionId);
         // Emit event
         emit questionDonated(questionId, msg.sender, msg.value);
@@ -265,18 +282,18 @@ contract QnA {
         return members[addr].ownComment;
     }
     
-    function getQuestionById(uint32 id) public view returns (address, uint, uint32, string memory, uint32, uint, uint, uint) {
+    function getQuestionById(uint32 id) public view returns (address, uint, uint32, string memory, bool, uint, uint, uint) {
         require(id < questions.length); // 找不到問題
         Question memory q = questions[id];
-        // 依序回傳問題的: 發問者、獎勵、類別、標題、接受的回答id、收到多少斗內、發問時間、回應數量
-        return (q.owner, q.value, q.qTypeId, q.title, q.acceptedAnswer, q.received_val, q.time, q.comments.length);
+        // 依序回傳問題的: 發問者、獎勵、類別、標題、是否已經被回答了、收到多少斗內、發問時間、回應數量
+        return (q.owner, q.value, q.qTypeId, q.title, q.isAnswered, q.received_val, q.time, q.comments.length);
     }
     
-    function getQuestionDetailById(uint32 id) public view returns (string memory, uint32[] memory) {
-        // 這裡回傳問題的內容，以及回應的list
+    function getQuestionDetailById(uint32 id) public view returns (string memory, uint32[] memory, bool, uint32) {
+        // 這裡回傳問題的內容，回應的list，是否已被解答，以及最佳解答id
         require(id < questions.length);  // 找不到問題
         Question memory q = questions[id];
-        return (q.content, q.comments);
+        return (q.content, q.comments, q.isAnswered, q.acceptedAnswer);
     }
     
     function getCommentById(uint32 id) public view returns (address, uint32, uint32, string memory, uint, uint) {
