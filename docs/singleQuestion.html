@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/main.css">
-  <title>Document</title>
+  <title>BlockBlock</title>
 </head>
 
 <body>
@@ -22,17 +22,8 @@
           </button>
     
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item active h5">
-                <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item h5">
-                <a class="nav-link" href="#">Javascript</a>
-              </li>
+            <ul class="mx-auto">
     
-              <li class="nav-item h5">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
-              </li>
             </ul>
             <div id="beforelogin">
               <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
@@ -69,7 +60,14 @@
       </div>
       <div class="row">
         <div class="col-lg-9">
-          <p id="qsContent">拉拉拉拉阿拉阿拉拉拉內文</p>
+          <div class="d-flex">
+            <span id="qsReward" class="badge badge-primary">獎賞: 1 Finney</span>
+            <div id="badgeForBest" style="margin-left: 10px">
+              <span class="badge badge-success">已選出最佳解答</span>
+            </div>
+          </div>
+          <p style="padding-top: 20px; font-size: 2em" id="qsContent">拉拉拉拉阿拉阿拉拉拉內文</p>
+          <p id="donateDisplay" style="color: gray;">收到金額: 1000 Ether</p>
         </div>
         <div class="col-lg-3">
           <ul class="share-buttons">
@@ -81,6 +79,7 @@
         </div>
       </div>
       <hr>
+
       <div class="sqPostAnswer">
         <div class="d-flex align-items-center person-panel-box">
           <img src="">
@@ -102,18 +101,42 @@
       
       <div id="commentList">
         <div class="media mb-4">
+          <input type="checkbox" class="checkBestAnswer">
           <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
           <div class="media-body">
             <h5 class="mt-0">Commenter Name</h5>
             <p>讚讚!</p>
+            <span class="badge badge-primary">收到: 1000 Ether</span>
+          </div>
+          <div class="d-flex commentList">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              <input type="number" min="1">
+              <select id="inputGroupSelect01">
+                <option value="1">Ether</option>
+                <option value="2">Finney</option>
+                <option value="3">Szabo</option>
+                <option value="3">Shannon</option>
+                <option value="3">MWei</option>
+                <option value="3">KWei</option>
+                <option value="3">Wei</option>
+              </select>
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary" type="button"><img alt="Tweet" src="images/like.png"/></button>
+              </div>
+              <a href=""></a>
+            </div>
           </div>
         </div>
       </div>
-      
 
+
+
+    
 
       <!-- <div class="media mb-4">
         <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        
         <div class="media-body">
           <h5 class="mt-0">A</h5>
           djf; ja ;
@@ -133,7 +156,6 @@
               ajf;jafj;sd
             </div>
           </div>
-
         </div>
       </div> -->
     </div>
@@ -154,19 +176,6 @@
     const param = getQueryString();
     const questionID = parseInt(param.q,10);
     setQuestionAndAnswerList(questionID);
-
-    $('#answerSubmit').click(async function () {
-      try {
-        const metaMaskUserObject = JSON.parse(localStorage.getItem('metaMaskUserObject'));
-        const user = metaMaskUserObject.account;
-        await addAnswer(user,questionID, $('#Answer').val());
-        alert("發布成功");
-        location.reload();
-      } catch (error) {
-        console.error(error);
-        alert("發布失敗");
-      }
-    });
   </script>
 
 </body>

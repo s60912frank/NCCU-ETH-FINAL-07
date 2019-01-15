@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/main.css">
-  <title>Question</title>
+  <title>BlockBlock</title>
 </head>
 
 <body>
@@ -22,17 +22,8 @@
         </button>
   
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item active h5">
-              <a class="nav-link" href="#">Ethereum <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item h5">
-              <a class="nav-link" href="#">Javascript</a>
-            </li>
+          <ul class="mx-auto">
   
-            <li class="nav-item h5">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Swift(尚未開放)</a>
-            </li>
           </ul>
           <div id="beforelogin">
             <button class="btn my-2 my-sm-0 btn-outline-light font-weight-bold">登入</button>
@@ -65,8 +56,8 @@
               <input id="postTitle" class="form-control" type="text" placeholder="問題標題">
             </div>
             <div class="form-group col-md-4">
-              <label for="inputPassword4">問題金額</label>
-              <input id="postAmount" class="form-control" type="number" placeholder="1(finney)">
+              <label for="inputPassword4">問題金額(finney)</label>
+              <input id="postAmount" class="form-control" type="number" placeholder="1" value="1" min="1">
               <!-- Mwei, -->
             </div>
             <div class="form-group col-md-4">

@@ -9753,5 +9753,20 @@ ul.share-buttons .sr-only {
 .singleQuestion .sqPostAnswer hr {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+.singleQuestion .commentDonateList img {
+  height: 1.5em;
+  width: 1.5em;
+}
+.singleQuestion .commentDonateList button {
+  border-radius: 12px !important;
+}
+.singleQuestion .commentDonateList input {
+  width: 100px;
+}
+.singleQuestion .checkBestAnswer {
+  width: 1.5em;
+  height: 3em;
+  margin-right: 7px;
+}
 
 /*# sourceMappingURL=main.css.map */

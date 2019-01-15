@@ -30,4 +30,23 @@ ul.share-buttons{
       border: 1px solid rgba(0,0,0,0.1);
     }
   }
+  .commentDonateList{
+    img{
+      height: 1.5em;
+      width: 1.5em;
+    }
+    button {
+      border-radius: 12px !important;
+    }
+    input {
+      width:100px;
+    }
+  }
+
+  .checkBestAnswer{
+    width: 1.5em;
+    height: 3em;
+    margin-right: 7px;
+  }
+ 
 }
