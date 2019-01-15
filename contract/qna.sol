@@ -291,11 +291,21 @@ contract QnA {
         return members[addr].ownComment;
     }
     
-    function getQuestionById(uint32 id) public view returns (address, uint, uint32, string memory, bool, uint, uint, uint) {
+    function getQuestionById(uint32 id) public view returns (address, uint, uint32, string memory, bool, uint, uint, uint, uint) {
         require(id < questions.length); // 找不到問題
         Question memory q = questions[id];
-        // 依序回傳問題的: 發問者、獎勵、類別、標題、是否已經被回答了、收到多少斗內、發問時間、回應數量
-        return (q.owner, q.value, q.qTypeId, q.title, q.isAnswered, q.received_val, q.time, q.comments.length);
+        // 依序回傳問題的: 發問者、獎勵、類別、標題、是否已經被回答了、收到多少斗內、發問時間、過期時間、回應數量
+        return (
+            q.owner, 
+            q.value, 
+            q.qTypeId, 
+            q.title, 
+            q.isAnswered, 
+            q.received_val, 
+            q.time, 
+            q.time + question_expire_after, 
+            q.comments.length
+            );
     }
     
     function getQuestionDetailById(uint32 id) public view returns (string memory, uint32[] memory, bool, uint32) {
