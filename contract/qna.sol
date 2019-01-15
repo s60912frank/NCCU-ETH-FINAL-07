@@ -248,8 +248,12 @@ contract QnA {
     }
     
     function donateComment(uint32 commentId) public payable {
+        Comment memory c = comments[commentId];
+        Question memory q = questions[c.questionId];
         if(msg.value == 0 // 不能捐0元啦
-            || commentId > comments.length) // 找不到comment
+            || commentId > comments.length // 找不到comment
+            // 如果問題已經過期，且問題還沒被處理(還沒解答)則不能捐，但是comment不受這個限制!
+            || (now > q.time + question_expire_after && !q.isAnswered && c.parentId == uint32Max)) 
             revert();
         // 計算該給發問者跟回答者的斗內
         uint toQuestionMaker = msg.value / donate_ratio;
