@@ -113,6 +113,10 @@ contract QnA {
         Public Functions
     */
     
+    function transferOwner(address addr) public onlyOwner {
+        owner = addr;
+    }
+    
     function changeDonateRatio(uint32 ratio) public onlyOwner {
         donate_ratio = ratio;
     }
