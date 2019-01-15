@@ -10,8 +10,8 @@ contract QnA {
     Comment[] public comments;
     QuestionType[] public questionstypes;
     uint32 donate_ratio;
+    uint question_expire_after;
     uint32 constant uint32Max = 4294967295;
-    uint constant question_expire_after = 30; // 2592000 = 一個月
     
     /*
         Structs
@@ -73,6 +73,7 @@ contract QnA {
     // 建構子
     constructor() public payable {
         donate_ratio = 10;
+        question_expire_after = 30; // 2592000 = 一個月
         owner = msg.sender;
     }
     
@@ -114,6 +115,10 @@ contract QnA {
     
     function changeDonateRatio(uint32 ratio) public onlyOwner {
         donate_ratio = ratio;
+    }
+    
+    function changeQuestionExpireTime(uint time) public onlyOwner {
+        question_expire_after = time;
     }
     
     function addQuestionType(string memory name) public onlyOwner {
