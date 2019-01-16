@@ -215,10 +215,9 @@ const filterProblemList = async(filterString) => {
             </a>
             <div class="row d-flex justify-content-between">
               <div class="col-6">
-                <p class="badge badge-light">${askerAddress}</p>
                 <p class="badge badge-light">${qsTypeString}</p>
               </div>
-              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small>${showDay}</small></div>
+              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small class="badge badge-light">${qsTypeString}</small><small>${showDay}</small></div>
             </div>
           </div>
         </div>
@@ -266,10 +265,9 @@ const setProblemList = async() =>{
             </a>
             <div class="row d-flex justify-content-between">
               <div class="col-6">
-                <p class="badge badge-light">${askerAddress}</p>
                 <p class="badge badge-light">${qsTypeString}</p>
               </div>
-              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small>${showDay}</small></div>
+              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small class="badge badge-light">${qsTypeString}</small><small>${showDay}</small></div>
             </div>
           </div>
         </div>
