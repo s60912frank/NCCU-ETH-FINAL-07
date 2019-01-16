@@ -217,7 +217,7 @@ const filterProblemList = async(filterString) => {
               <div class="col-6">
                 <p class="badge badge-light">${qsTypeString}</p>
               </div>
-              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small class="badge badge-light">${qsTypeString}</small><small>${showDay}</small></div>
+              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small class="badge badge-light">${askerAddress}</small><small>${showDay}</small></div>
             </div>
           </div>
         </div>
@@ -267,7 +267,7 @@ const setProblemList = async() =>{
               <div class="col-6">
                 <p class="badge badge-light">${qsTypeString}</p>
               </div>
-              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small class="badge badge-light">${qsTypeString}</small><small>${showDay}</small></div>
+              <div class="col-6 text-right font-weight-light text-secondary font-italic"><small class="badge badge-light">${askerAddress}</small><small>${showDay}</small></div>
             </div>
           </div>
         </div>
