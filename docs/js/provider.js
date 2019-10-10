@@ -2,16 +2,20 @@
 let  web3MetamaskProvider;
 // util section //
 const getProvider = async () => {
-  try {
-    if (typeof web3 !== 'undefined') {
-      web3_Metamask = new Web3(web3.currentProvider);
-      console.log("metamask connect");
-      web3MetamaskProvider  = web3_Metamask;
-    }else{
-      console.log("no metamsk");
+  // Modern dapp browsers...
+  if (window.ethereum) {
+    try {
+      // Request account access if needed
+      await ethereum.enable();
+      web3MetamaskProvider = new Web3(ethereum);
+    } catch (error) {
+      alert("Login disabled!");
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
+  }
+  // Non-dapp browsers...
+  else {
+    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
   }
 }
 const checkUser = async (isToggle=true)=>{
@@ -98,6 +102,7 @@ const login = async () => {
       // const accounts = await web3MetamaskProvider.eth.getAccounts()
       const accounts = await web3MetamaskProvider.eth.getAccounts()
       if(accounts.length < 1){
+        console.log(accounts);
         throw new Error("Have metamask,No login");
       }
       const firstUser = accounts[accountNumber]
